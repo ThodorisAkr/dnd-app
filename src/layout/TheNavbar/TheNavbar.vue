@@ -12,7 +12,7 @@ const routes = [
 </script>
 
 <template>
-  <header class="bg-sky-500 w-full">
+  <header class="bg-rose-900 w-full">
     <nav class="container mx-auto h-[4rem] flex items-center">
       <RouterLink
         v-for="route in routes"
