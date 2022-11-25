@@ -17,6 +17,23 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import("@/views/MyCharacters.vue"),
     },
+    {
+      path: "/classes",
+      name: "ClassesLayout",
+      component: () => import("@/views/CharacterClasses.vue"),
+      children: [
+        {
+          path: "/",
+          name: "CharacterClasses",
+          component: () => import("@/views/CharacterClasses.vue"),
+        },
+        {
+          path: ":class",
+          name: "SpecificClass",
+          component: () => import("@/views/SpecificClass.vue"),
+        },
+      ],
+    },
   ],
 });
 
