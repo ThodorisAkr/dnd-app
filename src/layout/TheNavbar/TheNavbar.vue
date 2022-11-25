@@ -5,20 +5,21 @@ const routes = [
     title: "Home",
   },
   {
-    to: { name: "About" },
-    title: "About",
+    to: { name: "MyCharacters" },
+    title: "My Characters",
   },
 ];
 </script>
 
 <template>
-  <header>
-    <nav class="container mx-auto py-3 bg-sky-500">
+  <header class="bg-sky-500 w-full">
+    <nav class="container mx-auto h-[4rem] flex items-center">
       <RouterLink
         v-for="route in routes"
         :key="route.name"
         :to="route.to"
         class="mx-2"
+        :data-testid="route.title"
       >
         {{ route.title }}
       </RouterLink>

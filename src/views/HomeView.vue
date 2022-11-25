@@ -1,6 +1,6 @@
 <script setup></script>
 
 <template>
-  <h1>This is the home page</h1>
+  <h1>Welcome to my DnD catalogue!</h1>
   <main></main>
 </template>
