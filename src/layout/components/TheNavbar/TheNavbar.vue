@@ -1,12 +1,13 @@
 <script setup>
 const routes = [
   {
-    to: { name: "Home" },
+    to: { name: "HomeView" },
     title: "Home",
   },
+
   {
-    to: { name: "MyCharacters" },
-    title: "My Characters",
+    to: { name: "CharacterClasses" },
+    title: "Classes",
   },
 ];
 </script>

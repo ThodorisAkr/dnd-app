@@ -6,5 +6,4 @@ test("it should work", () => {
   const { getByTestId } = render(MyComponent);
 
   getByTestId("Home");
-  getByTestId("About");
 });

@@ -12,7 +12,7 @@ export default function useHttp() {
       return res;
     } catch (err) {
       pending.value = false;
-      error.value = err;
+      error.value = err.response.data;
       return;
     }
   };
