@@ -1,4 +1,8 @@
 <script setup>
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+
 const routes = [
   {
     to: { name: "HomeView" },
@@ -10,6 +14,10 @@ const routes = [
     title: "Classes",
   },
 ];
+
+const isActive = (name) => {
+  return name === route.name;
+};
 </script>
 
 <template>
@@ -17,9 +25,10 @@ const routes = [
     <nav class="container mx-auto h-[4rem] flex items-center">
       <RouterLink
         v-for="route in routes"
-        :key="route.name"
+        :key="route.to.name"
         :to="route.to"
-        class="mx-2"
+        class="mx-2 text-xl"
+        :class="isActive(route.to.name) ? 'border-b-2 ' : ''"
         :data-testid="route.title"
       >
         {{ route.title }}
@@ -28,4 +37,8 @@ const routes = [
   </header>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+a {
+  transition: all 0s ease-in-out;
+}
+</style>

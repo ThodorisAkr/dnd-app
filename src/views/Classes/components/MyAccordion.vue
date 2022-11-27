@@ -4,12 +4,12 @@ const isOpen = ref(false);
 const accordionClasses = computed(() => {
   if (isOpen.value) {
     return {
-      classes: "max-h-96 pt-2",
+      classes: "open",
       icon: "fa-chevron-up",
     };
   } else {
     return {
-      classes: "max-h-0 p-0",
+      classes: "",
       icon: "fa-chevron-down",
     };
   }
@@ -32,10 +32,7 @@ const handleToggle = () => {
         class="cursor-pointer ml-6"
       ></font-awesome-icon>
     </div>
-    <div
-      class="accordion-content overflow-hidden"
-      :class="accordionClasses.classes"
-    >
+    <div class="accordion-content" :class="accordionClasses.classes">
       <slot name="content"></slot>
     </div>
   </div>
@@ -43,6 +40,14 @@ const handleToggle = () => {
 
 <style scoped>
 .accordion-content {
-  transition: max-height 0.3s ease-out, padding 0.3s ease;
+  margin-top: 10px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 1s cubic-bezier(0, 1, 0, 1);
+}
+
+.accordion-content.open {
+  max-height: 1000px;
+  transition: max-height 1s ease-in-out;
 }
 </style>

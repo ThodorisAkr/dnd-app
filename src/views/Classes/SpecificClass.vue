@@ -4,6 +4,7 @@ import { getClass } from "@/api/classesApi.js";
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import MyAccordion from "./components/MyAccordion.vue";
+import BaseSpinner from "../../components/BaseSpinner.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -128,12 +129,21 @@ const titleClasses = "font-bold text-3xl mt-4";
           </div>
         </div>
 
-        <div class="order-1 md:order-2 flex flex-col items-start">
-          <img :src="getClassImage()" alt="" style="object-fit: contain" />
+        <div
+          class="order-1 md:order-2 flex flex-col items-start h-[300px] md:h-[416px]"
+        >
+          <img
+            :src="getClassImage()"
+            alt=""
+            style="object-fit: contain"
+            class="h-full"
+          />
         </div>
       </div>
     </div>
-    <div v-else-if="pending">LOADING</div>
+    <div v-else-if="pending">
+      <base-spinner></base-spinner>
+    </div>
 
     <div v-else-if="error">An error occured {{ error.error }}</div>
   </div>

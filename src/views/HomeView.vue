@@ -1,18 +1,4 @@
-<script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-const router = useRouter();
-
-const dndClasses = ref([]);
-
-const getImage = (charClass) => {
-  return `../src/assets/classes/${charClass}.svg`;
-};
-
-const handleClassesRedirect = (charClass) => {
-  router.push({ name: "SpecificClass", params: { class: charClass } });
-};
-</script>
+<script setup></script>
 
 <template>
   <section
