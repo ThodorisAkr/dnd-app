@@ -24,13 +24,32 @@ const router = createRouter({
       children: [
         {
           path: "",
-          name: "CharacterClasses",
-          component: () => import("@/views/Classes/CharacterClasses.vue"),
+          name: "ClassesView",
+          component: () => import("@/views/Classes/ClassesView.vue"),
         },
         {
           path: ":class",
           name: "SpecificClass",
           component: () => import("@/views/Classes/SpecificClass.vue"),
+        },
+      ],
+    },
+
+    {
+      path: "/monsters",
+      name: "Monsters",
+      component: DefaultLayout,
+      children: [
+        {
+          path: "",
+          name: "MonstersView",
+          component: () => import("@/views/Monsters/MonstersView.vue"),
+        },
+
+        {
+          path: ":monster",
+          name: "SpecificMonster",
+          component: () => import("@/views/Monsters/SpecificMonster.vue"),
         },
       ],
     },

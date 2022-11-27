@@ -10,8 +10,13 @@ const routes = [
   },
 
   {
-    to: { name: "CharacterClasses" },
+    to: { name: "ClassesView" },
     title: "Classes",
+  },
+
+  {
+    to: { name: "MonstersView" },
+    title: "Monsters",
   },
 ];
 
