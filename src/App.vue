@@ -1,14 +1,7 @@
-<script setup>
-import TheNavbar from "./layout/TheNavbar/TheNavbar.vue";
-</script>
+<script setup></script>
 
 <template>
-  <div>
-    <the-navbar></the-navbar>
-    <div class="">
-      <RouterView />
-    </div>
+  <div class="bg-white">
+    <RouterView />
   </div>
 </template>
-
-<style module></style>
