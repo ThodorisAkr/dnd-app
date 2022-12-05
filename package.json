@@ -1,10 +1,10 @@
 {
-  "name": "vue3-dummy",
+  "name": "dnd-app",
   "description": "Quick boilerplate for your next project, containing - Vite, Vuex, Vue Router & Tailwind CSS. This was created as part of my tutorial series.",
   "version": "1.0.8",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ThodorisAkr/vue3-dummy.git"
+    "url": "https://github.com/ThodorisAkr/dnd-app.git"
   },
   "scripts": {
     "dev": "vite",
