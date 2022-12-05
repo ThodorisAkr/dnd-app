@@ -1,6 +1,6 @@
 {
   "name": "dnd-app",
-  "description": "Quick boilerplate for your next project, containing - Vite, Vuex, Vue Router & Tailwind CSS. This was created as part of my tutorial series.",
+  "description": "An app about DnD developed for practicing",
   "version": "1.0.8",
   "repository": {
     "type": "git",
@@ -56,26 +56,7 @@
     "tailwind",
     "tailwindcss",
     "tailwind-css",
-    "pinia",
-    "svg",
-    "vue 3 boilerplate",
-    "vue3 boilerplate",
-    "vue 3 skeleton",
-    "vue3 skeleton",
-    "vue 3 starter",
-    "vue3 starter",
-    "vue 3 webpack boilerplate",
-    "vue3 webpack boilerplate",
-    "vue 3 webpack skeleton",
-    "vue3 webpack skeleton",
-    "vue 3 webpack starter",
-    "vue3 webpack starter",
-    "vue3 enterprise boilerplate",
-    "vue 3 enterprise boilerplate",
-    "vue3 enterprise skeleton",
-    "vue 3 enterprise skeleton",
-    "vue3 enterprise starter",
-    "vue 3 enterprise starter"
+    "pinia"
   ],
   "author": "richardevcom <hello@richardev.com> (https://richardev.com)"
 }

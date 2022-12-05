@@ -18,11 +18,18 @@ const routes = [
     to: { name: "MonstersView" },
     title: "Monsters",
   },
+
+  {
+    to: { name: "NotesView" },
+    title: "Notes",
+  },
 ];
 
 const isActive = (name) => {
   return name === route.name;
 };
+
+/** @TODO handle routes that need authentication */
 </script>
 
 <template>

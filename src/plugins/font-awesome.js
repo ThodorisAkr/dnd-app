@@ -10,6 +10,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 /* add each imported icon to the library */
 library.add(
@@ -19,5 +20,6 @@ library.add(
   faChevronDown,
   faChevronUp,
   faChevronLeft,
-  faMagnifyingGlass
+  faMagnifyingGlass,
+  faPlus
 );

@@ -56,6 +56,19 @@ const router = createRouter({
         },
       ],
     },
+
+    {
+      path: "/notes",
+      name: "Notes",
+      component: DefaultLayout,
+      children: [
+        {
+          path: "",
+          name: "NotesView",
+          component: () => import("@/views/Notes/NotesView.vue"),
+        },
+      ],
+    },
   ],
 });
 
