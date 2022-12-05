@@ -1,5 +1,5 @@
-import { api } from "./api";
+import { directusApi } from "./api";
 
 export const getHomeData = () => {
-  return api.get("http://localhost:8055/items/homedata");
+  return directusApi.get("items/homedata");
 };

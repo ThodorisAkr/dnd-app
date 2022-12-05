@@ -3,13 +3,11 @@ import useHttp from "@/composables/useHttp.js";
 import { getHomeData } from "@/api/homeApi.js";
 import { ref } from "vue";
 
-const { pending, error, fetch: handleHome } = useHttp();
-console.log(pending, error);
+const { fetch: handleHome } = useHttp();
 const homeData = ref(null);
 
 const getDirectusCollection = async () => {
   const { data } = await handleHome(getHomeData);
-  console.log(data.data);
   homeData.value = data.data;
 };
 
