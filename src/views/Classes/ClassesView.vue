@@ -1,20 +1,20 @@
 <script setup>
 import useHttp from "@/composables/useHttp.js";
-import { getData } from "@/api/homeApi.js";
+import { getAllClasses } from "@/api/classesApi.js";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import BaseSpinner from "../../components/BaseSpinner.vue";
 const router = useRouter();
 
 const dndClasses = ref([]);
-const { pending, fetch: handleGetData } = useHttp();
+const { pending, fetch: handleGetClasses } = useHttp();
 
 const getImage = (charClass) => {
   return `../src/assets/classes/${charClass}.svg`;
 };
 
-const handleHomeData = async () => {
-  const response = await handleGetData(getData);
+const handleClasses = async () => {
+  const response = await handleGetClasses(getAllClasses);
   dndClasses.value = response.data.results;
 };
 
@@ -22,7 +22,7 @@ const handleClassesRedirect = (charClass) => {
   router.push({ name: "SpecificClass", params: { class: charClass } });
 };
 
-handleHomeData();
+handleClasses();
 </script>
 
 <template>

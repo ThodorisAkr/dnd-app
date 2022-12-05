@@ -1,4 +1,18 @@
-<script setup></script>
+<script setup>
+import useHttp from "@/composables/useHttp.js";
+import { getHomeData } from "@/api/homeApi.js";
+import { ref } from "vue";
+
+const { fetch: handleHome } = useHttp();
+const homeData = ref(null);
+
+const getDirectusCollection = async () => {
+  const { data } = await handleHome(getHomeData);
+  homeData.value = data.data;
+};
+
+homeData.value = getDirectusCollection();
+</script>
 
 <template>
   <section
@@ -30,16 +44,28 @@
     </div>
   </section>
   <section class="classes__section h-full pt-12 bg-[#FFF6F6]">
-    <div class="container mx-auto"></div>
+    <div class="container mx-auto">
+      <div v-for="(item, idx) in homeData" :key="idx">
+        <div></div>
+        <h2 class="text-2xl font-bold pb-6">
+          {{ item.title }}
+        </h2>
+        <div class="home__content" v-html="item.description"></div>
+      </div>
+    </div>
   </section>
 </template>
 
-<style scss scoped>
+<style>
 .hero {
   max-height: calc(100vh - 4rem);
 }
 
 .hero__container {
   background-image: url("../assets/home/hero.png");
+}
+
+.home__content > ul {
+  list-style: disc !important;
 }
 </style>

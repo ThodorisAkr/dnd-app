@@ -1,11 +1,13 @@
 <script setup>
 import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import useHttp from "@/composables/useHttp.js";
 import { getMonster } from "@/api/monstersApi.js";
 import BaseSpinner from "@/components/BaseSpinner.vue";
 import { ref } from "vue";
 
 const route = useRoute();
+const router = useRouter();
 const { pending, error, fetch } = useHttp();
 
 const monster = route.params.monster;
@@ -106,7 +108,7 @@ const attrTypes = [
                 </li>
               </ul>
             </div>
-            <div class="col-span-2 xl:col-span-3">
+            <div v-if="monsterData.languages" class="col-span-2 xl:col-span-3">
               <h2 :class="titleClasses">Languages</h2>
               <span :class="valueClasses">{{ monsterData.languages }}</span>
             </div>

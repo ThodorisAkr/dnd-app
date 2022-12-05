@@ -1,5 +1,5 @@
-import { api } from "./api";
+import { directusApi } from "./api";
 
-export const getData = () => {
-  return api.get("api/classes");
+export const getHomeData = () => {
+  return directusApi.get("items/homedata");
 };

@@ -1,4 +1,5 @@
 import axios from "axios";
+import CONFIG from "@/common/config";
 
 const HEADERS = {
   "Content-Type": "application/json",
@@ -6,12 +7,18 @@ const HEADERS = {
 };
 
 const axiosParams = {
-  baseURL: "https://www.dnd5eapi.co/",
+  baseURL: CONFIG.main_api,
+  headers: HEADERS,
+};
+
+const directusParams = {
+  baseURL: CONFIG.directus_api,
   headers: HEADERS,
 };
 
 // Axios instance
 const axiosInstance = axios.create(axiosParams);
+const directusInstance = axios.create(directusParams);
 
 // Error handling
 const errorInterceptor = (error) => {
@@ -24,16 +31,21 @@ const responseInterceptor = (response) => {
 };
 
 axiosInstance.interceptors.response.use(responseInterceptor, errorInterceptor);
+directusInstance.interceptors.response.use(
+  responseInterceptor,
+  errorInterceptor
+);
 
 // Main api function
-const apiMethods = (axios) => {
+const apiMethods = (instance) => {
   return {
-    get: (url, config) => axios.get(url, config),
-    post: (url, body, config) => axios.post(url, body, config),
-    put: (url, body, config) => axios.put(url, body, config),
-    patch: (url, body, config) => axios.patch(url, body, config),
-    delete: (url, config) => axios.delete(url, config),
+    get: (url, config) => instance.get(url, config),
+    post: (url, body, config) => instance.post(url, body, config),
+    put: (url, body, config) => instance.put(url, body, config),
+    patch: (url, body, config) => instance.patch(url, body, config),
+    delete: (url, config) => instance.delete(url, config),
   };
 };
 
 export const api = apiMethods(axiosInstance);
+export const directusApi = apiMethods(directusInstance);
