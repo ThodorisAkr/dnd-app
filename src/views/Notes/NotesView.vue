@@ -1,11 +1,19 @@
 <script setup>
 import { useNoteStore } from "@/stores/notes";
+import BaseDialog from "../../components/BaseDialog.vue";
+import { ref } from "vue";
+
 const noteSystem = useNoteStore();
+const dialogOpen = ref(false);
 
 const addNewCampaign = (payload) => {
   console.log(payload);
   // noteSystem.addCampaign(payload);
   return;
+};
+
+const toggleDialog = () => {
+  dialogOpen.value = !dialogOpen.value;
 };
 </script>
 
@@ -35,6 +43,13 @@ const addNewCampaign = (payload) => {
         <div v-for="(item, idx) in noteSystem.notes" :key="idx">
           {{ item }}
         </div>
+
+        <button @click="toggleDialog">TOGGLE DIALOG</button>
+        <base-dialog
+          v-model:open="dialogOpen"
+          height="400"
+          width="800"
+        ></base-dialog>
       </div>
     </div>
   </div>
