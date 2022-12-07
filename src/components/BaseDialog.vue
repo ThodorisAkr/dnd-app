@@ -1,6 +1,5 @@
 <script setup>
-import { defineEmits, watch, useAttrs, ref } from "vue";
-const emit = defineEmits(["update:open"]);
+import { watch, ref } from "vue";
 const props = defineProps({
   open: {
     type: Boolean,
@@ -8,56 +7,30 @@ const props = defineProps({
   },
 });
 
+const dialogOpening = ref(false);
 const dialogOpen = ref(false);
-const attrs = useAttrs();
-const dialogStyles = {
-  ["bg-white"]: true,
-  [`h-[${attrs.height || "300"}px]`]: true,
-  [`w-full`]: true,
-  [`min-w-[300px]`]: true,
-  [`max-w-[${attrs.width}px]`]: true,
-};
-
-const closeDialog = () => {
-  dialogOpen.value = false;
-  setTimeout(() => emit("update:open", false), 200);
-};
 
 watch(
   () => props.open,
   (newVal) => {
     if (newVal) {
-      setTimeout(() => (dialogOpen.value = true), 0);
-      document.body.style.overflow = "hidden";
+      setTimeout(() => (dialogOpen.value = true), 200);
+      dialogOpening.value = true;
+      document.body.style.overflowY = "hidden";
     } else {
-      document.body.style.overflow = "visible";
+      dialogOpen.value = false;
+      setTimeout(() => (dialogOpening.value = false), 200);
+      document.body.style.overflowY = "visible";
     }
   }
 );
 </script>
 
 <template>
-  <div class="dialog__background p-10" v-if="props.open">
+  <div class="dialog__background p-10" v-if="dialogOpening">
     <Transition>
-      <div
-        v-if="dialogOpen"
-        :class="dialogStyles"
-        class="p-2 relative"
-        :style="`max-width:${attrs.width}px `"
-      >
-        <slot name="title">
-          <h1 class="text-xl">Title</h1>
-          <slot name="close">
-            <button class="absolute right-0 top-0 p-3" @click="closeDialog()">
-              <font-awesome-icon
-                icon="fas fa-times"
-                class="text-red-900"
-              ></font-awesome-icon>
-            </button>
-          </slot>
-        </slot>
-        <hr class="my-4" />
-        <slot name="content"></slot>
+      <div v-if="dialogOpen">
+        <slot> </slot>
       </div>
     </Transition>
   </div>
@@ -78,13 +51,13 @@ watch(
 
 .v-enter-active,
 .v-leave-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.1s ease-out;
   opacity: 1;
 }
 
 .v-enter-from,
 .v-leave-to {
-  transform: translateY(400px);
+  transform: translateY(200px);
   opacity: 0;
 }
 </style>

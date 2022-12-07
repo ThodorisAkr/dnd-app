@@ -58,14 +58,20 @@ const router = createRouter({
     },
 
     {
-      path: "/notes",
-      name: "Notes",
+      path: "/campaigns",
+      name: "Campaigns",
       component: DefaultLayout,
       children: [
         {
           path: "",
-          name: "NotesView",
-          component: () => import("@/views/Notes/NotesView.vue"),
+          name: "CampaignsView",
+          component: () => import("@/views/Campaigns/CampaignsView.vue"),
+        },
+        {
+          path: ":id",
+          name: "SpecificCampaign",
+          component: () => import("@/views/Campaigns/SpecificCampaign.vue"),
+          props: (route) => ({ campaignId: route.params.id }),
         },
       ],
     },

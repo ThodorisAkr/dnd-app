@@ -20,8 +20,8 @@ const routes = [
   },
 
   {
-    to: { name: "NotesView" },
-    title: "Notes",
+    to: { name: "Campaigns" },
+    title: "Campaigns",
   },
 ];
 
