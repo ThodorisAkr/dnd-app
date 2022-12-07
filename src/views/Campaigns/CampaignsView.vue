@@ -1,7 +1,6 @@
 <script setup>
 import { useNoteStore } from "@/stores/notes";
 import { reactive, ref } from "vue";
-
 import CampaignCard from "./components/CampaignCard.vue";
 
 import BaseDialog from "@/components/BaseDialog.vue";
@@ -9,6 +8,7 @@ import BaseCard from "@/components/BaseCard.vue";
 import TextInput from "@/components/Inputs/TextInput.vue";
 
 const noteSystem = useNoteStore();
+
 const dialogOpen = ref(false);
 
 const initialState = {

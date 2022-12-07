@@ -72,6 +72,13 @@ const router = createRouter({
           name: "SpecificCampaign",
           component: () => import("@/views/Campaigns/SpecificCampaign.vue"),
           props: (route) => ({ campaignId: route.params.id }),
+          children: [
+            {
+              path: ":type",
+              name: "SpecificNotes",
+              component: () => import("@/views/Campaigns/SpecificNotes.vue"),
+            },
+          ],
         },
       ],
     },
