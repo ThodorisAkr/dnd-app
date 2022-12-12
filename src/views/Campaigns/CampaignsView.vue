@@ -1,33 +1,21 @@
 <script setup>
 import { useNoteStore } from "@/stores/notes";
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import CampaignCard from "./components/CampaignCard.vue";
 
 import BaseDialog from "@/components/BaseDialog.vue";
 import BaseCard from "@/components/BaseCard.vue";
-import TextInput from "@/components/Inputs/TextInput.vue";
+
+import CampaignAddForm from "./components/CampaignAddForm.vue";
 
 const noteSystem = useNoteStore();
 
 const dialogOpen = ref(false);
 
-const initialState = {
-  title: "",
-  description: "",
-  img: "",
-};
-
-const campaignData = reactive({ ...initialState });
-
 const addNewCampaign = (payload) => {
   noteSystem.addCampaign(JSON.parse(JSON.stringify(payload)));
   toggleDialog();
-  clearForm();
   return;
-};
-
-const clearForm = () => {
-  Object.assign(campaignData, initialState);
 };
 
 const toggleDialog = () => {
@@ -97,34 +85,9 @@ const toggleDialog = () => {
             <div
               class="card__content flex-auto flex flex-column justify-center items-start w-full"
             >
-              <form
-                class="campaign__form h-full"
-                @submit.prevent="addNewCampaign(campaignData)"
-              >
-                <text-input
-                  v-model:value="campaignData.title"
-                  placeholder="Enter your title..."
-                  class="my-2"
-                ></text-input>
-                <text-input
-                  v-model:value="campaignData.description"
-                  placeholder="Enter your description..."
-                  class="my-2"
-                ></text-input>
-                <text-input
-                  v-model:value="campaignData.img"
-                  placeholder="Enter your image url..."
-                ></text-input>
-
-                <div class="text-right mt-auto">
-                  <button
-                    type="submit"
-                    class="bg-blue-400 py-1 px-2 rounded-lg text-white my-4"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
+              <campaign-add-form
+                @submit-campaign="addNewCampaign($event)"
+              ></campaign-add-form>
             </div>
           </base-card>
         </base-dialog>
@@ -136,13 +99,6 @@ const toggleDialog = () => {
 <style lang="scss" scoped>
 .page__container {
   min-height: calc(100vh - 4rem);
-}
-
-.campaign__form {
-  min-width: 100%;
-  padding: 30px;
-  display: flex;
-  flex-flow: column;
 }
 
 .campaign__card {

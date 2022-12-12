@@ -8,7 +8,16 @@ export const useNoteStore = defineStore({
   getters: {},
   actions: {
     addCampaign(payload) {
-      this.notes.push(payload);
+      this.notes.push({ ...payload, typeNotes: {} });
+      localStorage.setItem("notes", JSON.stringify(this.notes));
+    },
+
+    addNote(idx, payload, type) {
+      let toEdit = this.notes[idx].typeNotes;
+      if (!toEdit[type]) {
+        toEdit[type] = [];
+      }
+      toEdit[type].push(payload);
       localStorage.setItem("notes", JSON.stringify(this.notes));
     },
   },

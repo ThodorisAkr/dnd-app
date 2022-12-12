@@ -13,9 +13,10 @@ const props = defineProps({
 const router = useRouter();
 const openCampaignNotes = () => {
   router.push({
-    name: "SpecificCampaign",
+    name: "SpecificNotes",
     params: {
       id: props.item.id || 1,
+      type: "characters",
     },
   });
 };

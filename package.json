@@ -7,7 +7,7 @@
     "url": "https://github.com/ThodorisAkr/dnd-app.git"
   },
   "scripts": {
-    "dev": "vite",
+    "serve": "vite",
     "build": "vite build",
     "test": "vitest",
     "preview": "vite preview --port 4173",

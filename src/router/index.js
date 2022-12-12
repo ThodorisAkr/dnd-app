@@ -2,6 +2,15 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import DefaultLayout from "../layout/DefaultLayout.vue";
 
+const noteTypes = [
+  "characters",
+  "monsters",
+  "quests",
+  "lore",
+  "items",
+  "locations",
+];
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior() {
@@ -77,6 +86,23 @@ const router = createRouter({
               path: ":type",
               name: "SpecificNotes",
               component: () => import("@/views/Campaigns/SpecificNotes.vue"),
+              props: (route) => ({
+                campaignId: route.params.id,
+                noteType: route.params.type,
+              }),
+              beforeEnter(to, from, next) {
+                if (!noteTypes.includes(to.params.type)) {
+                  router.replace({
+                    name: "SpecificNotes",
+                    params: {
+                      id: to.params.id,
+                      type: "characters",
+                    },
+                  });
+                } else {
+                  next();
+                }
+              },
             },
           ],
         },
