@@ -1,6 +1,6 @@
 <script setup>
 import BaseCard from "../../../components/BaseCard.vue";
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 import { useRouter } from "vue-router";
 
 const props = defineProps({

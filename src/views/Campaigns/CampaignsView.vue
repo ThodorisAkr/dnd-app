@@ -6,7 +6,7 @@ import CampaignCard from "./components/CampaignCard.vue";
 import BaseDialog from "@/components/BaseDialog.vue";
 import BaseCard from "@/components/BaseCard.vue";
 
-import CampaignAddForm from "./components/CampaignAddForm.vue";
+import AddCampaignForm from "./components/AddCampaignForm.vue";
 
 const noteSystem = useNoteStore();
 
@@ -85,9 +85,9 @@ const toggleDialog = () => {
             <div
               class="card__content flex-auto flex flex-column justify-center items-start w-full"
             >
-              <campaign-add-form
+              <add-campaign-form
                 @submit-campaign="addNewCampaign($event)"
-              ></campaign-add-form>
+              ></add-campaign-form>
             </div>
           </base-card>
         </base-dialog>

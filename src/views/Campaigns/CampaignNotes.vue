@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useNoteStore } from "@/stores/notes";
 import NoteTypeCard from "./components/NoteTypeCard.vue";
@@ -31,6 +31,7 @@ const noteOptions = {
   right: [
     { label: "Lore", img: "lore" },
     { label: "Quests", img: "quests" },
+    { label: "Other", img: "other" },
   ],
 };
 </script>

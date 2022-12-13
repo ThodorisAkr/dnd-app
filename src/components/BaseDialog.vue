@@ -1,11 +1,21 @@
 <script setup>
 import { watch, ref } from "vue";
+import { useClickOutside } from "@/composables/useClickOutside.js";
 const props = defineProps({
   open: {
     type: Boolean,
     required: true,
   },
 });
+
+const emit = defineEmits(["click-outside"]);
+
+const myDialog = ref(null);
+useClickOutside(
+  myDialog,
+  () => emit("click-outside"),
+  () => dialogOpen.value
+);
 
 const dialogOpening = ref(false);
 const dialogOpen = ref(false);
@@ -14,12 +24,12 @@ watch(
   () => props.open,
   (newVal) => {
     if (newVal) {
-      setTimeout(() => (dialogOpen.value = true), 200);
+      setTimeout(() => (dialogOpen.value = true), 100);
       dialogOpening.value = true;
       document.body.style.overflowY = "hidden";
     } else {
       dialogOpen.value = false;
-      setTimeout(() => (dialogOpening.value = false), 200);
+      setTimeout(() => (dialogOpening.value = false), 100);
       document.body.style.overflowY = "visible";
     }
   }
@@ -29,7 +39,7 @@ watch(
 <template>
   <div class="dialog__background p-10" v-if="dialogOpening">
     <Transition>
-      <div v-if="dialogOpen">
+      <div ref="myDialog" v-if="dialogOpen">
         <slot> </slot>
       </div>
     </Transition>

@@ -1,10 +1,12 @@
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
+import { useRoute } from "vue-router";
 import { useNoteStore } from "@/stores/notes";
+import { useDebounce } from "@/composables/useDebounce";
 import NoteItemCard from "./components/NoteItemCard.vue";
 import BaseCard from "../../components/BaseCard.vue";
 import BaseDialog from "../../components/BaseDialog.vue";
-import NoteAddForm from "./components/NoteAddForm.vue";
+import AddNoteForm from "./components/AddNoteForm.vue";
 export default {
   name: "SpecificNotes",
 
@@ -23,17 +25,22 @@ export default {
     NoteItemCard,
     BaseCard,
     BaseDialog,
-    NoteAddForm,
+    AddNoteForm,
   },
 
   setup(props) {
-    const search = ref("");
+    const route = useRoute();
 
     const noteSystem = useNoteStore();
+    const filteredNotes = ref(null);
     const currTypeNotes = computed(() => {
       const item = noteSystem.notes[props.campaignId - 1];
+      return item?.typeNotes[props.noteType] || [];
+    });
 
-      return item.typeNotes[props.noteType] || null;
+    const computedNotes = computed(() => {
+      if (filteredNotes.value) return filteredNotes.value;
+      return currTypeNotes.value;
     });
 
     const addNoteDialogOpen = ref(false);
@@ -50,9 +57,31 @@ export default {
       addNoteDialogOpen.value = false;
     };
 
+    const search = ref("");
+    const { debouncedSearch } = useDebounce(searchNote);
+
+    function searchNote(key) {
+      if (!key) {
+        filteredNotes.value = null;
+      }
+      if (currTypeNotes.value) {
+        filteredNotes.value = currTypeNotes.value.filter((item) =>
+          item.title.toLowerCase().includes(key.toLowerCase())
+        );
+        return;
+      }
+    }
+
+    watch(search, (newVal) => debouncedSearch.value(newVal));
+
+    watch(
+      () => route.params.type,
+      () => (filteredNotes.value = null)
+    );
+
     return {
       search,
-      currTypeNotes,
+      computedNotes,
       openNoteDialog,
       addNewNote,
       closeDialog,
@@ -91,12 +120,15 @@ export default {
         />
       </label>
     </div>
-    <div v-for="item in currTypeNotes" :key="item" class="w-full">
+    <div v-for="item in computedNotes" :key="item" class="w-full">
       <note-item-card :item="item"></note-item-card>
     </div>
 
-    <base-dialog :open="addNoteDialogOpen">
-      <base-card class="h-[500px] bg-white w-full md:w-[600px] rounded-lg">
+    <base-dialog :open="addNoteDialogOpen" @click-outside="closeDialog()">
+      <base-card
+        ref="formDialog"
+        class="h-[500px] bg-white w-full md:w-[600px] rounded-lg"
+      >
         <div
           class="card__title rounded-t-lg grid grid-cols-12 gap-1 bg-blue-800"
         >
@@ -118,7 +150,7 @@ export default {
         <div
           class="card__content flex flex-auto flex-column justify-center items-start w-full"
         >
-          <note-add-form @submit-form="addNewNote($event)"></note-add-form>
+          <add-note-form @submit-form="addNewNote($event)"></add-note-form>
         </div>
       </base-card>
     </base-dialog>

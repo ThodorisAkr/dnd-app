@@ -1,7 +1,7 @@
 {
   "name": "dnd-app",
   "description": "An app about DnD developed for practicing",
-  "version": "1.0.8",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/ThodorisAkr/dnd-app.git"
@@ -42,21 +42,5 @@
     "vite": "^3.1.2",
     "vite-svg-loader": "^3.6.0",
     "vitest": "^0.25.3"
-  },
-  "keywords": [
-    "vue",
-    "vue3",
-    "vuejs",
-    "vue3js",
-    "boilerplate",
-    "template",
-    "router",
-    "vuerouter",
-    "vue-router",
-    "tailwind",
-    "tailwindcss",
-    "tailwind-css",
-    "pinia"
-  ],
-  "author": "richardevcom <hello@richardev.com> (https://richardev.com)"
+  }
 }
