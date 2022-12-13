@@ -12,10 +12,17 @@ const props = defineProps({
     default: "Enter text...",
   },
 });
-
+const updateVal = () => {
+  emit("update:value", inputVal.value);
+};
 const inputVal = ref(props.value);
 
-watch(inputVal, (newVal) => emit("update:value", newVal));
+watch(
+  () => props.value,
+  (newVal) => {
+    inputVal.value = newVal;
+  }
+);
 </script>
 
 <template>
@@ -27,6 +34,7 @@ watch(inputVal, (newVal) => emit("update:value", newVal));
       :placeholder="props.placeholder"
       type="text"
       name="search"
+      @change="updateVal()"
     />
   </label>
 </template>

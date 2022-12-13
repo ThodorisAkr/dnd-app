@@ -24,11 +24,11 @@ const toggleDialog = () => {
 </script>
 
 <template>
-  <div class="page__container">
+  <div class="page__container py-10">
     <div class="container mx-auto">
       <div class="notes__container">
-        <div class="flex justify-start items-center">
-          <h1 class="text-5xl py-20">My Campaigns</h1>
+        <div class="flex justify-start items-center mb-10">
+          <h1 class="text-5xl">My Campaigns</h1>
           <button class="mt-2 ml-8" @click="toggleDialog()">
             <font-awesome-icon
               icon="fas fa-plus"

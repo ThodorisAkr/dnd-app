@@ -37,9 +37,9 @@ watch(
 </script>
 
 <template>
-  <div class="dialog__background p-10" v-if="dialogOpening">
+  <div class="dialog__background p-10" v-show="dialogOpening">
     <Transition>
-      <div ref="myDialog" v-if="dialogOpen">
+      <div ref="myDialog" v-show="dialogOpen">
         <slot> </slot>
       </div>
     </Transition>
