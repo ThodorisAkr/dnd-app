@@ -1,32 +1,23 @@
-<script>
+<script setup>
 import TextInput from "@/components/Inputs/TextInput.vue";
 import { reactive } from "vue";
 
-export default {
-  components: {
-    TextInput,
-  },
+const initialState = {
+  title: "",
+  description: "",
+  img: "",
+};
+const emit = defineEmits(["submit-campaign"]);
 
-  setup(props, { emit }) {
-    const initialState = {
-      title: "",
-      description: "",
-      img: "",
-    };
+const campaignData = reactive({ ...initialState });
 
-    const campaignData = reactive({ ...initialState });
+const clearForm = () => {
+  Object.assign(campaignData, initialState);
+};
 
-    const clearForm = () => {
-      Object.assign(campaignData, initialState);
-    };
-
-    const submitForm = () => {
-      emit("submit-campaign", { ...campaignData });
-      clearForm();
-    };
-
-    return { submitForm, campaignData };
-  },
+const submitForm = () => {
+  emit("submit-campaign", { ...campaignData });
+  clearForm();
 };
 </script>
 

@@ -34,7 +34,7 @@ const searchMonster = (key) => {
   hasSearched.value = true;
   pendingMonsterFilter.value = true;
   const newMonsters = allMonsters.value.filter((monster) =>
-    monster.index.includes(key.toLowerCase())
+    monster.index.toLowerCase().includes(key.toLowerCase())
   );
 
   filteredMonsters.value = newMonsters;

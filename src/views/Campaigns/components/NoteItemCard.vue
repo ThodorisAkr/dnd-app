@@ -1,48 +1,53 @@
-<script>
-import { ref } from "vue";
-export default {
-  props: {
-    item: {
-      type: Object,
-      required: true,
-    },
+<script setup>
+import { ref, defineProps } from "vue";
+import { useClickOutside } from "@/composables/useClickOutside.js";
+
+/**CONSTANTS */
+const userActions = [
+  { name: "Edit", handler: () => handleEdit() },
+  { name: "Delete", handler: () => handleDelete() },
+];
+
+/**PROPS / COMPOSABLES / EMITS */
+const props = defineProps({
+  item: {
+    type: Object,
+    required: true,
   },
+});
 
-  setup() {
-    const isOpen = ref(false);
+const emit = defineEmits(["edit-item", "delete-item"]);
 
-    const toggleOpen = () => {
-      isOpen.value = !isOpen.value;
-    };
+const menuRef = ref(null);
+useClickOutside(
+  menuRef,
+  () => toggleMenuOpen(),
+  () => isMenuOpen.value
+);
 
-    const userActions = [
-      { name: "Edit", handler: () => handleEdit() },
-      { name: "Delete", handler: () => handleDelete() },
-    ];
-    const isMenuOpen = ref(false);
+/**REACTIVE DATA */
 
-    const toggleMenuOpen = () => {
-      isMenuOpen.value = !isMenuOpen.value;
-    };
+const isOpen = ref(false);
+const isMenuOpen = ref(false);
 
-    const handleEdit = () => {
-      console.log("EDIT");
-      toggleMenuOpen();
-    };
+/**METHODS */
 
-    const handleDelete = () => {
-      console.log("DELETE");
-      toggleMenuOpen();
-    };
+const toggleOpen = () => {
+  isOpen.value = !isOpen.value;
+};
 
-    return {
-      isOpen,
-      toggleOpen,
-      isMenuOpen,
-      toggleMenuOpen,
-      userActions,
-    };
-  },
+const toggleMenuOpen = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+
+const handleEdit = (item) => {
+  emit("edit-item", item);
+  toggleMenuOpen();
+};
+
+const handleDelete = (item) => {
+  emit("delete-item", item);
+  toggleMenuOpen();
 };
 </script>
 
@@ -53,7 +58,9 @@ export default {
         class="flex justify-between items-end cursor-pointer py-2"
         @click="toggleOpen()"
       >
-        <h2 class="text-base md:text-xl font-semibold">{{ item.title }}</h2>
+        <h2 class="text-base md:text-xl font-semibold">
+          {{ props.item.title }}
+        </h2>
         <div>
           <font-awesome-icon
             icon="fas fa-chevron-down"
@@ -63,10 +70,10 @@ export default {
         </div>
       </div>
       <div v-show="isOpen" class="text-sm md:text-base py-3 border-t-2 py-3">
-        {{ item.description }}
+        {{ props.item.description }}
       </div>
     </div>
-    <div class="dropdown-wrapper relative">
+    <div ref="menuRef" class="dropdown-wrapper relative">
       <font-awesome-icon
         icon="fas fa-dice-d20"
         class="fa-2x ml-6 border-2 border-black rounded-lg p-1 self-center cursor-pointer transition duration-300"

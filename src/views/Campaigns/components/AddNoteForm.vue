@@ -1,7 +1,7 @@
-<script>
+<script setup>
 import TextInput from "@/components/Inputs/TextInput.vue";
 import { reactive } from "vue";
-
+const emit = defineEmits(["submit-form"]);
 const useNote = (initialState, emit) => {
   const formData = reactive({ ...initialState });
 
@@ -17,25 +17,15 @@ const useNote = (initialState, emit) => {
   return { formData, submitForm };
 };
 
-export default {
-  components: {
-    TextInput,
-  },
-
-  setup(_, { emit }) {
-    const initialState = {
-      title: "",
-      description: "",
-    };
-
-    const { formData: campaignData, submitForm: submitNote } = useNote(
-      initialState,
-      emit
-    );
-
-    return { submitNote, campaignData };
-  },
+const initialState = {
+  title: "",
+  description: "",
 };
+
+const { formData: campaignData, submitForm: submitNote } = useNote(
+  initialState,
+  emit
+);
 </script>
 
 <template>

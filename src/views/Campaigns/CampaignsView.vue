@@ -1,11 +1,11 @@
 <script setup>
-import { useNoteStore } from "@/stores/notes";
 import { ref } from "vue";
-import CampaignCard from "./components/CampaignCard.vue";
 
+import { useNoteStore } from "@/stores/notes";
+
+import CampaignCard from "./components/CampaignCard.vue";
 import BaseDialog from "@/components/BaseDialog.vue";
 import BaseCard from "@/components/BaseCard.vue";
-
 import AddCampaignForm from "./components/AddCampaignForm.vue";
 
 const noteSystem = useNoteStore();
@@ -64,7 +64,7 @@ const toggleDialog = () => {
           </div>
         </div>
 
-        <base-dialog :open="dialogOpen">
+        <base-dialog :open="dialogOpen" @click-outside="toggleDialog()">
           <base-card class="h-[500px] bg-white w-full md:w-[600px] rounded-lg">
             <div
               class="card__title rounded-t-lg grid grid-cols-12 gap-1 bg-blue-800"

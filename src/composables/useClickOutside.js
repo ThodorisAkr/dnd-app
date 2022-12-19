@@ -14,24 +14,20 @@ export async function useClickOutside(
 ) {
   if (!el_target_ref) return;
   if (!el_target_ref.value) {
-    console.log(
-      "useClickOutside",
-      "target element was not supplied or is null"
-    );
     //return
   }
 
-  var dont_use_first_click = 0;
+  // var dont_use_first_click = 0;
   let listener = async (e) => {
     var enable_click_outside = true;
     if (typeof callback_condition == "function") {
-      enable_click_outside = await callback_condition();
+      enable_click_outside = callback_condition();
     }
     if (!enable_click_outside) return;
-    if (dont_use_first_click == 0) {
-      dont_use_first_click++;
-      return;
-    }
+    // if (dont_use_first_click == 0) {
+    //   dont_use_first_click++;
+    //   return;
+    // }
     if (
       e.target == el_target_ref.value ||
       e.composedPath().includes(el_target_ref.value)

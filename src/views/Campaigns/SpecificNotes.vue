@@ -1,4 +1,4 @@
-<script>
+<script setup>
 import { ref, computed, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useNoteStore } from "@/stores/notes";
@@ -7,88 +7,65 @@ import NoteItemCard from "./components/NoteItemCard.vue";
 import BaseCard from "../../components/BaseCard.vue";
 import BaseDialog from "../../components/BaseDialog.vue";
 import AddNoteForm from "./components/AddNoteForm.vue";
-export default {
-  name: "SpecificNotes",
 
-  props: {
-    campaignId: {
-      type: [String, Number],
-      required: true,
-    },
-    noteType: {
-      type: String,
-      required: true,
-    },
+const props = defineProps({
+  campaignId: {
+    type: [String, Number],
+    required: true,
   },
-
-  components: {
-    NoteItemCard,
-    BaseCard,
-    BaseDialog,
-    AddNoteForm,
+  noteType: {
+    type: String,
+    required: true,
   },
+});
+const route = useRoute();
+const noteSystem = useNoteStore();
+const filteredNotes = ref(null);
+const currTypeNotes = computed(() => {
+  const item = noteSystem.notes[props.campaignId - 1];
+  return item?.typeNotes[props.noteType] || [];
+});
 
-  setup(props) {
-    const route = useRoute();
+const computedNotes = computed(() => {
+  if (filteredNotes.value) return filteredNotes.value;
+  return currTypeNotes.value;
+});
 
-    const noteSystem = useNoteStore();
-    const filteredNotes = ref(null);
-    const currTypeNotes = computed(() => {
-      const item = noteSystem.notes[props.campaignId - 1];
-      return item?.typeNotes[props.noteType] || [];
-    });
-
-    const computedNotes = computed(() => {
-      if (filteredNotes.value) return filteredNotes.value;
-      return currTypeNotes.value;
-    });
-
-    const addNoteDialogOpen = ref(false);
-    const openNoteDialog = () => {
-      addNoteDialogOpen.value = true;
-    };
-
-    const addNewNote = (payload) => {
-      noteSystem.addNote(props.campaignId - 1, payload, props.noteType);
-      closeDialog();
-    };
-
-    const closeDialog = () => {
-      addNoteDialogOpen.value = false;
-    };
-
-    const search = ref("");
-    const { debouncedSearch } = useDebounce(searchNote);
-
-    function searchNote(key) {
-      if (!key) {
-        filteredNotes.value = null;
-      }
-      if (currTypeNotes.value) {
-        filteredNotes.value = currTypeNotes.value.filter((item) =>
-          item.title.toLowerCase().includes(key.toLowerCase())
-        );
-        return;
-      }
-    }
-
-    watch(search, (newVal) => debouncedSearch.value(newVal));
-
-    watch(
-      () => route.params.type,
-      () => (filteredNotes.value = null)
-    );
-
-    return {
-      search,
-      computedNotes,
-      openNoteDialog,
-      addNewNote,
-      closeDialog,
-      addNoteDialogOpen,
-    };
-  },
+const addNoteDialogOpen = ref(false);
+const openNoteDialog = () => {
+  addNoteDialogOpen.value = true;
 };
+
+const addNewNote = (payload) => {
+  noteSystem.addNote(props.campaignId - 1, payload, props.noteType);
+  closeDialog();
+};
+
+const closeDialog = () => {
+  addNoteDialogOpen.value = false;
+};
+
+const search = ref("");
+const { debouncedSearch } = useDebounce(searchNote);
+
+function searchNote(key) {
+  if (!key) {
+    filteredNotes.value = null;
+  }
+  if (currTypeNotes.value) {
+    filteredNotes.value = currTypeNotes.value.filter((item) =>
+      item.title.toLowerCase().includes(key.toLowerCase())
+    );
+    return;
+  }
+}
+
+watch(search, (newVal) => debouncedSearch.value(newVal));
+
+watch(
+  () => route.params.type,
+  () => (filteredNotes.value = null)
+);
 </script>
 
 <template>

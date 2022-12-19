@@ -60,7 +60,7 @@ const noteOptions = {
       </div>
       <div class="col-span-2 lg:col-span-2 order-2 lg:order-4">
         <div
-          class="flex lg:grid grid-cols-2 lg:grid-cols-1 gap-1 lg:gap-4 place-items-center lg:place-items-end"
+          class="flex lg:grid grid-cols-2 lg:grid-cols-1 gap-1 lg:gap-4 xl:place-items-end lg:place-items-end"
         >
           <note-type-card
             v-for="item in noteOptions.right"
