@@ -18,12 +18,18 @@ const props = defineProps({
     required: true,
   },
 });
+
 const route = useRoute();
 const noteSystem = useNoteStore();
+const { debouncedSearch } = useDebounce(searchNote);
+
 const filteredNotes = ref(null);
+const search = ref("");
+const editingItem = ref(null);
+const deletingItemId = ref(null);
+
 const currTypeNotes = computed(() => {
-  const item = noteSystem.notes[props.campaignId - 1];
-  return item?.typeNotes[props.noteType] || [];
+  return noteSystem.getTypeNotes(props.campaignId - 1, props.noteType);
 });
 
 const computedNotes = computed(() => {
@@ -36,17 +42,26 @@ const openNoteDialog = () => {
   addNoteDialogOpen.value = true;
 };
 
-const addNewNote = (payload) => {
+const createUpdateNote = (payload) => {
+  if (editingItem.value) {
+    noteSystem.replaceNote(
+      props.campaignId - 1,
+      props.noteType,
+      editingItem.value.id,
+      payload
+    );
+    resetEditDelete();
+    closeDialog();
+    return;
+  }
   noteSystem.addNote(props.campaignId - 1, payload, props.noteType);
+  resetEditDelete();
   closeDialog();
 };
 
 const closeDialog = () => {
   addNoteDialogOpen.value = false;
 };
-
-const search = ref("");
-const { debouncedSearch } = useDebounce(searchNote);
 
 function searchNote(key) {
   if (!key) {
@@ -60,11 +75,28 @@ function searchNote(key) {
   }
 }
 
-watch(search, (newVal) => debouncedSearch.value(newVal));
+function handleEdit(item) {
+  console.log(item);
+  editingItem.value = { ...item };
+  openNoteDialog();
+}
 
+function handleDelete(idx) {
+  deletingItemId.value = idx;
+}
+
+function resetEditDelete() {
+  editingItem.value = null;
+  deletingItemId.value = null;
+}
+
+watch(search, (newVal) => debouncedSearch.value(newVal));
 watch(
   () => route.params.type,
-  () => (filteredNotes.value = null)
+  () => {
+    filteredNotes.value = null;
+    search.value = "";
+  }
 );
 </script>
 
@@ -97,8 +129,12 @@ watch(
         />
       </label>
     </div>
-    <div v-for="item in computedNotes" :key="item" class="w-full">
-      <note-item-card :item="item"></note-item-card>
+    <div v-for="(item, idx) in computedNotes" :key="idx" class="w-full">
+      <note-item-card
+        :item="item"
+        @edit-item="handleEdit($event)"
+        @delete-item="handleDelete(idx)"
+      ></note-item-card>
     </div>
 
     <base-dialog :open="addNoteDialogOpen" @click-outside="closeDialog()">
@@ -127,7 +163,10 @@ watch(
         <div
           class="card__content flex flex-auto flex-column justify-center items-start w-full"
         >
-          <add-note-form @submit-form="addNewNote($event)"></add-note-form>
+          <add-note-form
+            @submit-form="createUpdateNote($event)"
+            :editing-note="editingItem"
+          ></add-note-form>
         </div>
       </base-card>
     </base-dialog>

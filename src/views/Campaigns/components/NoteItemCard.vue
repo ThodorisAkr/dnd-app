@@ -40,13 +40,13 @@ const toggleMenuOpen = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
 
-const handleEdit = (item) => {
-  emit("edit-item", item);
+const handleEdit = () => {
+  emit("edit-item", props.item);
   toggleMenuOpen();
 };
 
-const handleDelete = (item) => {
-  emit("delete-item", item);
+const handleDelete = () => {
+  emit("delete-item", props.item);
   toggleMenuOpen();
 };
 </script>

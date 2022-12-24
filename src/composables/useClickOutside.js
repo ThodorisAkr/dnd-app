@@ -43,10 +43,10 @@ export async function useClickOutside(
   };
 
   onMounted(() => {
-    window.addEventListener("click", listener);
+    window.addEventListener("mousedown", listener);
   });
   onBeforeUnmount(() => {
-    window.removeEventListener("click", listener);
+    window.removeEventListener("mousedown", listener);
   });
   return {
     listener,

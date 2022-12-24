@@ -1,7 +1,15 @@
 <script setup>
 import TextInput from "@/components/Inputs/TextInput.vue";
-import { reactive } from "vue";
+import { reactive, watch } from "vue";
 const emit = defineEmits(["submit-form"]);
+
+const props = defineProps({
+  editingNote: {
+    type: Object,
+    required: false,
+    default: () => {},
+  },
+});
 const useNote = (initialState, emit) => {
   const formData = reactive({ ...initialState });
 
@@ -25,6 +33,15 @@ const initialState = {
 const { formData: campaignData, submitForm: submitNote } = useNote(
   initialState,
   emit
+);
+
+watch(
+  () => props.editingNote,
+  (newVal) => {
+    if (!newVal) return;
+    campaignData.title = newVal.title;
+    campaignData.description = newVal.description;
+  }
 );
 </script>
 

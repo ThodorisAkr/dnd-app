@@ -12,10 +12,11 @@ const props = defineProps({
 
 const router = useRouter();
 const openCampaignNotes = () => {
+  console.log();
   router.push({
     name: "SpecificNotes",
     params: {
-      id: props.item.id || 1,
+      id: props.item.id,
       type: "characters",
     },
   });
