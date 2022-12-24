@@ -2,12 +2,11 @@
 import useHttp from "@/composables/useHttp.js";
 import { getClass } from "@/api/classesApi.js";
 import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import MyAccordion from "./components/MyAccordion.vue";
 import BaseSpinner from "../../components/BaseSpinner.vue";
 
 const route = useRoute();
-const router = useRouter();
 const chosenClass = route.params.class;
 
 const classDetails = ref(null);
@@ -32,11 +31,7 @@ const titleClasses = "font-bold text-3xl mt-4";
   <div class="container mx-auto">
     <div v-if="classDetails" class="container mx-auto">
       <div class="flex items-center py-10">
-        <font-awesome-icon
-          icon="fa-solid fa-chevron-left"
-          class="fa-2x mr-4 text-redish cursor-pointer"
-          @click="router.go(-1)"
-        />
+        <the-back-button></the-back-button>
         <h1 class="text-5xl font-bold text-center">
           {{ classDetails.name }}
         </h1>

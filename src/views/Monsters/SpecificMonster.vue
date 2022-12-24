@@ -1,13 +1,11 @@
 <script setup>
 import { useRoute } from "vue-router";
-import { useRouter } from "vue-router";
 import useHttp from "@/composables/useHttp.js";
 import { getMonster } from "@/api/monstersApi.js";
 import BaseSpinner from "@/components/BaseSpinner.vue";
 import { ref } from "vue";
 
 const route = useRoute();
-const router = useRouter();
 const { pending, error, fetch } = useHttp();
 
 const monster = route.params.monster;
@@ -45,11 +43,7 @@ const attrTypes = [
   <div class="container mx-auto">
     <div v-if="monsterData">
       <div class="flex items-center py-10">
-        <font-awesome-icon
-          icon="fa-solid fa-chevron-left"
-          class="fa-2x mr-4 text-redish cursor-pointer"
-          @click="router.go(-1)"
-        />
+        <the-back-button></the-back-button>
 
         <h1 class="text-5xl py-10">{{ monsterData.name }}</h1>
       </div>

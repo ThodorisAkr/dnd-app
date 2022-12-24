@@ -38,6 +38,13 @@ const noteOptions = {
 
 <template>
   <div class="container mx-auto">
+    <div class="flex items-center pt-10">
+      <the-back-button></the-back-button>
+      <h1 class="text-5xl">
+        Notes for Campaign:
+        {{ noteSystem.getCampaignName(campaignId - 1).title }}
+      </h1>
+    </div>
     <div
       class="flex flex-wrap justify-center lg:grid grid-cols-2 lg:grid-cols-12 gap-2 pt-20"
     >
@@ -55,7 +62,7 @@ const noteOptions = {
           ></note-type-card>
         </div>
       </div>
-      <div class="w-full lg:col-span-8 order-3">
+      <div class="w-full lg:col-span-8 order-3 mx-2">
         <router-view></router-view>
       </div>
       <div class="col-span-2 lg:col-span-2 order-2 lg:order-4">
