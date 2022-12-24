@@ -13,21 +13,16 @@ export async function useClickOutside(
   callback_condition
 ) {
   if (!el_target_ref) return;
-  if (!el_target_ref.value) {
-    //return
-  }
 
-  // var dont_use_first_click = 0;
+  let action;
+
   let listener = async (e) => {
-    var enable_click_outside = true;
+    action = null;
+    let enable_click_outside = true;
     if (typeof callback_condition == "function") {
       enable_click_outside = callback_condition();
     }
     if (!enable_click_outside) return;
-    // if (dont_use_first_click == 0) {
-    //   dont_use_first_click++;
-    //   return;
-    // }
     if (
       e.target == el_target_ref.value ||
       e.composedPath().includes(el_target_ref.value)
@@ -38,15 +33,21 @@ export async function useClickOutside(
 
     //at this point we clicked outside the modal
     if (enable_click_outside && typeof on_click_outside == "function") {
-      on_click_outside();
+      action = on_click_outside;
     }
+  };
+
+  let handleAction = () => {
+    if (typeof action === "function") action();
   };
 
   onMounted(() => {
     window.addEventListener("mousedown", listener);
+    window.addEventListener("mouseup", handleAction);
   });
   onBeforeUnmount(() => {
     window.removeEventListener("mousedown", listener);
+    window.addEventListener("mouseup", handleAction);
   });
   return {
     listener,

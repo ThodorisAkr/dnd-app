@@ -61,14 +61,14 @@ export default {
 
 <style lang="scss" scoped>
 .active__border-l {
-  border-bottom: 2px solid red;
+  border-bottom: 3px solid red;
 }
 
 .active__border-r {
-  border-bottom: 2px solid red;
+  border-bottom: 3px solid red;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
   .active__border-l {
     border-bottom: 0;
     border-left: 4px solid red;

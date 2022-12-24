@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineProps } from "vue";
+import { ref } from "vue";
 import { useClickOutside } from "@/composables/useClickOutside.js";
 
 /**CONSTANTS */
@@ -83,7 +83,7 @@ const handleDelete = () => {
       <transition name="slide-in-up">
         <div
           v-if="isMenuOpen"
-          class="dropdown-menu mt-1 rounded absolute -right-44 top-0 z-10 shadow-lg w-40 max-w-xs bg-black/95"
+          class="dropdown-menu mt-1 rounded absolute right-0 top:20 lg:-right-44 lg:top-0 z-10 shadow-lg w-40 max-w-xs bg-black/95"
         >
           <ul class="list-none overflow-hidden rounded border-2 border-black">
             <li

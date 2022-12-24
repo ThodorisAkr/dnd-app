@@ -37,7 +37,7 @@ const noteOptions = {
 </script>
 
 <template>
-  <div class="xl:container mx-auto">
+  <div class="container mx-auto">
     <div
       class="flex flex-wrap justify-center lg:grid grid-cols-2 lg:grid-cols-12 gap-2 pt-20"
     >

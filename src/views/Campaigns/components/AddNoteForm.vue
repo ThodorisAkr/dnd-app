@@ -1,15 +1,25 @@
 <script setup>
-import TextInput from "@/components/Inputs/TextInput.vue";
-import { reactive, watch } from "vue";
-const emit = defineEmits(["submit-form"]);
+import { ref, reactive, watch } from "vue";
 
+import { useKeyPress } from "@/composables/useKeyPress";
+
+import TextInput from "@/components/Inputs/TextInput.vue";
+
+const emit = defineEmits(["submit-form"]);
 const props = defineProps({
   editingNote: {
     type: Object,
     required: false,
     default: () => {},
   },
+  isOpen: {
+    type: Boolean,
+    required: true,
+  },
 });
+
+const titleInput = ref(null);
+
 const useNote = (initialState, emit) => {
   const formData = reactive({ ...initialState });
 
@@ -25,6 +35,21 @@ const useNote = (initialState, emit) => {
   return { formData, submitForm };
 };
 
+useKeyPress([
+  {
+    keys: new Set(["Control", "/"]),
+    handler: () => {
+      if (!props.isOpen) return;
+      const input = titleInput.value.input;
+
+      if (document.activeElement === input) {
+        return input.blur();
+      }
+      input.focus();
+    },
+  },
+]);
+
 const initialState = {
   title: "",
   description: "",
@@ -38,9 +63,28 @@ const { formData: campaignData, submitForm: submitNote } = useNote(
 watch(
   () => props.editingNote,
   (newVal) => {
-    if (!newVal) return;
+    if (!newVal) {
+      campaignData.title = "";
+      campaignData.description = "";
+      return;
+    }
+
     campaignData.title = newVal.title;
     campaignData.description = newVal.description;
+  }
+);
+
+watch(
+  () => props.isOpen,
+  (newVal) => {
+    const input = titleInput.value.input;
+    if (newVal) {
+      setTimeout(() => {
+        input.focus();
+      }, 200);
+    } else {
+      input.blur();
+    }
   }
 );
 </script>
@@ -48,6 +92,7 @@ watch(
 <template>
   <form class="note__form h-full flex-auto" @submit.prevent="submitNote()">
     <text-input
+      ref="titleInput"
       v-model:value="campaignData.title"
       placeholder="Enter your title..."
       class="my-2"
