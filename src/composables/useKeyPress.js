@@ -5,7 +5,7 @@ export function useKeyPress(keysHandlers) {
 
   const handler = (e) => {
     if (e.repeat) return;
-    const key = e.key;
+    const key = e.code;
     keysDown.add(key);
 
     let deleteKeys = false;
@@ -25,7 +25,7 @@ export function useKeyPress(keysHandlers) {
   };
 
   const keyupHandler = (e) => {
-    const key = e.key;
+    const key = e.code;
     keysDown.delete(key);
   };
 

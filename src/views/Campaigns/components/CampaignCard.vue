@@ -65,41 +65,26 @@ const getTypeImg = (type) => {
       <div class="font-bold text-xl text-center">
         {{ props.item.title }}
       </div>
-      <div class="absolute top-0 right-0">
-        <div ref="typeMenu" class="relative z-10">
-          <font-awesome-icon
-            icon="fa-solid fa-ellipsis-vertical"
-            class="fa-2x ml-6 bg-black text-white rounded-bl-lg rounded-tr-lg p-2 self-center cursor-pointer"
-            @click.stop="toggleMenuOpen()"
-          />
-          <transition name="slide-in-up">
+      <div ref="typeMenu">
+        <ul class="flex list-none rounded border-black mt-4 w-full">
+          <li
+            v-for="(item, idx) in userActions"
+            :key="idx"
+            class="mx-3 cursor-pointer transition duration-300 flex items-center"
+            :title="item"
+          >
             <div
-              v-if="isMenuOpen"
-              class="dropdown-menu mt-1 rounded absolute right-0 top:20 lg:-right-44 lg:top-0 z-40 shadow-lg w-40 max-w-xs bg-red-900"
+              class="rounded-full w-[50px] h-[50px] bg-white border-4 overflow-hidden flex justify-center items-center"
+              @click.stop="openCampaignNotes(item)"
             >
-              <ul
-                class="list-none overflow-hidden rounded border-2 border-black"
-              >
-                <li
-                  v-for="(item, idx) in userActions"
-                  :key="idx"
-                  class="cursor-pointer py-2 px-4 transition duration-300 text-white font-semibold hover:text-black hover:bg-white flex items-center"
-                  @click.stop="openCampaignNotes(item)"
-                >
-                  <div
-                    class="rounded-full w-[40px] h-[40px] bg-white border-2 overflow-hidden flex justify-center items-center mr-2"
-                  >
-                    <img
-                      :src="getTypeImg(item)"
-                      style="object-fit: contain; max-height: 32px"
-                    />
-                  </div>
-                  {{ item }}
-                </li>
-              </ul>
+              <img
+                :src="getTypeImg(item)"
+                class="max-h-[40px] hover:max-h-[45px] max-w-[40px] hover:max-w-[45px]"
+                style="object-fit: contain"
+              />
             </div>
-          </transition>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
   </base-card>

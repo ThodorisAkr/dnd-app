@@ -26,7 +26,7 @@ const noteSystem = useNoteStore();
 const { debouncedSearch } = useDebounce(searchNote);
 useKeyPress([
   {
-    keys: new Set(["Control", "/"]),
+    keys: new Set(["ControlLeft", "Slash"]),
     handler: () => {
       if (addNoteDialogOpen.value) return;
       if (document.activeElement === searchInput.value) {
@@ -37,7 +37,7 @@ useKeyPress([
   },
 
   {
-    keys: new Set(["Control", "y"]),
+    keys: new Set(["ControlLeft", "KeyY"]),
     handler: () => {
       if (addNoteDialogOpen.value) {
         closeDialog();
@@ -173,25 +173,27 @@ watch(
           @delete-item="handleDelete(item.id)"
         ></note-item-card>
       </div>
-      <div
-        v-if="computedNotes.length <= 0"
-        class="flex-grow flex flex-col justify-center items-center"
-      >
-        <h2 class="text-xl font-bold">
-          You have no notes for {{ props.noteType }}
-        </h2>
-        <button
-          class="mx-auto rounded-lg p-2 text-white flex items-center justify-center border-2 border-black my-6 hover:bg-black/5 active:bg-black/20"
-          @click="openNoteDialog()"
-        >
-          <font-awesome-icon
-            icon="fas fa-plus"
-            class="fa-xl mr-1 text-black"
-          ></font-awesome-icon>
-          <span class="text-black cursor-pointer">
-            Create your first note!
-          </span>
-        </button>
+      <div class="flex-grow flex flex-col justify-center items-center">
+        <div v-if="computedNotes.length <= 0 && !search">
+          <h2 class="text-xl font-bold">
+            You have no notes for {{ props.noteType }}
+          </h2>
+          <button
+            class="mx-auto rounded-lg p-2 text-white flex items-center justify-center border-2 border-black my-6 hover:bg-black/5 active:bg-black/20"
+            @click="openNoteDialog()"
+          >
+            <font-awesome-icon
+              icon="fas fa-plus"
+              class="fa-xl mr-1 text-black"
+            ></font-awesome-icon>
+            <span class="text-black cursor-pointer">
+              Create your first note!
+            </span>
+          </button>
+        </div>
+        <div v-else-if="computedNotes.length <= 0 && search">
+          <h2 class="text-xl font-bold">No items found for that search</h2>
+        </div>
       </div>
     </div>
 
