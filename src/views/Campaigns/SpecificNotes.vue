@@ -160,12 +160,34 @@ watch(
         />
       </label>
     </div>
-    <div v-for="(item, idx) in computedNotes" :key="idx" class="w-full">
-      <note-item-card
-        :item="item"
-        @edit-item="handleEdit($event)"
-        @delete-item="handleDelete(idx)"
-      ></note-item-card>
+    <div class="min-h-full flex flex-col">
+      <div v-for="(item, idx) in computedNotes" :key="idx" class="w-full">
+        <note-item-card
+          :item="item"
+          @edit-item="handleEdit($event)"
+          @delete-item="handleDelete(idx)"
+        ></note-item-card>
+      </div>
+      <div
+        v-if="computedNotes.length <= 0"
+        class="flex-grow flex flex-col justify-center items-center"
+      >
+        <h2 class="text-xl font-bold">
+          You have no notes for {{ props.noteType }}
+        </h2>
+        <button
+          class="mx-auto rounded-lg p-2 text-white flex items-center justify-center border-2 border-black my-6 hover:bg-black/5 active:bg-black/20"
+          @click="openNoteDialog()"
+        >
+          <font-awesome-icon
+            icon="fas fa-plus"
+            class="fa-xl mr-1 text-black"
+          ></font-awesome-icon>
+          <span class="text-black cursor-pointer">
+            Create your first note!
+          </span>
+        </button>
+      </div>
     </div>
 
     <base-dialog :open="addNoteDialogOpen" @click-outside="closeDialog()">
