@@ -110,8 +110,13 @@ function handleEdit(item) {
   openNoteDialog(true);
 }
 
-function handleDelete(idx) {
-  deletingItemId.value = idx;
+function handleDelete(id) {
+  deletingItemId.value = id;
+  let text = "Are you sure you want to delete the note?";
+  if (confirm(text) == true) {
+    noteSystem.deleteNote(props.campaignId - 1, props.noteType, id);
+  }
+  resetEditDelete();
 }
 
 function resetEditDelete() {
@@ -165,7 +170,7 @@ watch(
         <note-item-card
           :item="item"
           @edit-item="handleEdit($event)"
-          @delete-item="handleDelete(idx)"
+          @delete-item="handleDelete(item.id)"
         ></note-item-card>
       </div>
       <div

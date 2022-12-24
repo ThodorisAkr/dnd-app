@@ -29,11 +29,18 @@ export const useNoteStore = defineStore({
     },
 
     replaceNote(idx, type, id, payload) {
-      console.log(payload);
       const toEdit = this.notes[idx].typeNotes[type];
       let editedNote = toEdit.find((item) => item.id === id);
       editedNote.title = payload.title;
       editedNote.description = payload.description;
+      localStorage.setItem("notes", JSON.stringify(this.notes));
+    },
+
+    deleteNote(idx, type, id) {
+      let toDelete = this.notes[idx].typeNotes[type];
+      if (!toDelete) return;
+      let itemIdx = toDelete.findIndex((item) => item.id === id);
+      toDelete.splice(itemIdx, 1);
       localStorage.setItem("notes", JSON.stringify(this.notes));
     },
     getTypeNotes(idx, type) {

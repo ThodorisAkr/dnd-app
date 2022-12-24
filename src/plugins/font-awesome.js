@@ -13,6 +13,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
 /* add each imported icon to the library */
 library.add(
@@ -25,5 +26,6 @@ library.add(
   faMagnifyingGlass,
   faPlus,
   faTimes,
-  faArrowRightFromBracket
+  faArrowRightFromBracket,
+  faEllipsisVertical
 );

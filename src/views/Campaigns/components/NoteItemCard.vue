@@ -73,7 +73,7 @@ const handleDelete = () => {
         {{ props.item.description }}
       </div>
     </div>
-    <div ref="menuRef" class="dropdown-wrapper relative">
+    <div ref="menuRef" class="relative">
       <font-awesome-icon
         icon="fas fa-dice-d20"
         class="fa-2x ml-6 border-2 border-black rounded-lg p-1 self-center cursor-pointer transition duration-300"
