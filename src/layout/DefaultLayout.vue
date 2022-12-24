@@ -1,7 +1,7 @@
 <template>
   <div>
     <the-navbar></the-navbar>
-    <div class="mb-20" style="min-height: 100vh">
+    <div class="mb-20 main__content">
       <router-view />
     </div>
     <div>
@@ -14,3 +14,9 @@
 import TheNavbar from "./components/TheNavbar/TheNavbar.vue";
 import TheFooter from "./components/TheFooter.vue";
 </script>
+
+<style scoped>
+.main__content {
+  min-height: calc(100vh - 4rem);
+}
+</style>

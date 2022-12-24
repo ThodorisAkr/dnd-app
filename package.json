@@ -1,13 +1,13 @@
 {
   "name": "dnd-app",
-  "description": "Quick boilerplate for your next project, containing - Vite, Vuex, Vue Router & Tailwind CSS. This was created as part of my tutorial series.",
-  "version": "1.0.8",
+  "description": "An app about DnD developed for practicing",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/ThodorisAkr/dnd-app.git"
   },
   "scripts": {
-    "dev": "vite",
+    "serve": "vite",
     "build": "vite build",
     "test": "vitest",
     "preview": "vite preview --port 4173",
@@ -26,14 +26,12 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
-    "@testing-library/vue": "^6.6.1",
     "@vitejs/plugin-vue": "^3.1.0",
     "@vue/eslint-config-prettier": "^7.0.0",
     "autoprefixer": "^10.4.11",
     "cssnano": "^5.1.13",
     "eslint": "^8.23.1",
     "eslint-plugin-vue": "^9.5.1",
-    "happy-dom": "^7.7.0",
     "postcss": "^8.4.16",
     "postcss-import": "^15.0.0",
     "prettier": "^2.7.1",
@@ -42,40 +40,5 @@
     "vite": "^3.1.2",
     "vite-svg-loader": "^3.6.0",
     "vitest": "^0.25.3"
-  },
-  "keywords": [
-    "vue",
-    "vue3",
-    "vuejs",
-    "vue3js",
-    "boilerplate",
-    "template",
-    "router",
-    "vuerouter",
-    "vue-router",
-    "tailwind",
-    "tailwindcss",
-    "tailwind-css",
-    "pinia",
-    "svg",
-    "vue 3 boilerplate",
-    "vue3 boilerplate",
-    "vue 3 skeleton",
-    "vue3 skeleton",
-    "vue 3 starter",
-    "vue3 starter",
-    "vue 3 webpack boilerplate",
-    "vue3 webpack boilerplate",
-    "vue 3 webpack skeleton",
-    "vue3 webpack skeleton",
-    "vue 3 webpack starter",
-    "vue3 webpack starter",
-    "vue3 enterprise boilerplate",
-    "vue 3 enterprise boilerplate",
-    "vue3 enterprise skeleton",
-    "vue 3 enterprise skeleton",
-    "vue3 enterprise starter",
-    "vue 3 enterprise starter"
-  ],
-  "author": "richardevcom <hello@richardev.com> (https://richardev.com)"
+  }
 }

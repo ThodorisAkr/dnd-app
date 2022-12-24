@@ -2,6 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import DefaultLayout from "../layout/DefaultLayout.vue";
 
+import campaignRoutes from "./campaignsRoutes.js";
+import monstersRoutes from "./monstersRoutes.js";
+import classesRoutes from "./classesRoutes.js";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior() {
@@ -20,42 +24,9 @@ const router = createRouter({
         },
       ],
     },
-    {
-      path: "/classes",
-      name: "ClassesLayout",
-      component: () => import("@/layout/DefaultLayout.vue"),
-      children: [
-        {
-          path: "",
-          name: "ClassesView",
-          component: () => import("@/views/Classes/ClassesView.vue"),
-        },
-        {
-          path: ":class",
-          name: "SpecificClass",
-          component: () => import("@/views/Classes/SpecificClass.vue"),
-        },
-      ],
-    },
-
-    {
-      path: "/monsters",
-      name: "Monsters",
-      component: DefaultLayout,
-      children: [
-        {
-          path: "",
-          name: "MonstersView",
-          component: () => import("@/views/Monsters/MonstersView.vue"),
-        },
-
-        {
-          path: ":monster",
-          name: "SpecificMonster",
-          component: () => import("@/views/Monsters/SpecificMonster.vue"),
-        },
-      ],
-    },
+    classesRoutes,
+    monstersRoutes,
+    campaignRoutes,
   ],
 });
 

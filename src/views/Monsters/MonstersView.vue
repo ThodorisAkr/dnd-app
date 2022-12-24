@@ -34,7 +34,7 @@ const searchMonster = (key) => {
   hasSearched.value = true;
   pendingMonsterFilter.value = true;
   const newMonsters = allMonsters.value.filter((monster) =>
-    monster.index.includes(key.toLowerCase())
+    monster.index.toLowerCase().includes(key.toLowerCase())
   );
 
   filteredMonsters.value = newMonsters;
@@ -59,12 +59,12 @@ handleMonsters();
 <template>
   <div class="container mx-auto py-10">
     <div v-if="!pending && !error">
-      <div class="flex items-end justify-between mb-10">
+      <div class="lg:flex items-end justify-between mb-10">
         <div class="flex items-center text-purpleish">
           <font-awesome-icon icon="fa-brands fa-d-and-d" class="fa-3x" />
           <h1 class="text-5xl">DnD Monsters</h1>
         </div>
-        <label class="relative block">
+        <label class="relative block mt-5 lg:mt-0 min-w-[250px] max-w-[400px]">
           <span class="sr-only">Search</span>
           <span class="absolute inset-y-0 left-0 flex items-center pl-2 z-10">
             <font-awesome-icon

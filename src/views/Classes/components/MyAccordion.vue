@@ -43,11 +43,11 @@ const handleToggle = () => {
   margin-top: 10px;
   overflow: hidden;
   max-height: 0;
-  transition: max-height 1s cubic-bezier(0, 1, 0, 1);
+  transition: max-height 0.2s cubic-bezier(0, 1, 0, 1);
 }
 
 .accordion-content.open {
   max-height: 1000px;
-  transition: max-height 1s ease-in-out;
+  transition: max-height 0.2s ease-in-out;
 }
 </style>
