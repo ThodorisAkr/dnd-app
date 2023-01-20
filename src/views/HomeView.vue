@@ -1,18 +1,4 @@
-<script setup>
-import useHttp from "@/composables/useHttp.js";
-import { getHomeData } from "@/api/homeApi.js";
-import { ref } from "vue";
-
-const { fetch: handleHome } = useHttp();
-const homeData = ref(null);
-
-const getDirectusCollection = async () => {
-  const { data } = await handleHome(getHomeData);
-  homeData.value = data.data;
-};
-
-homeData.value = getDirectusCollection();
-</script>
+<script setup></script>
 
 <template>
   <section
@@ -23,34 +9,26 @@ homeData.value = getDirectusCollection();
     ></div>
 
     <div
-      class="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8"
+      class="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 flex justify-center items-center lg:justify-start lg:h-full lg:px-8"
     >
       <div class="max-w-xl text-center sm:text-left">
         <h1 class="text-3xl font-extrabold sm:text-5xl">
           <strong class="block font-extrabold text-rose-600">
-            Welcome to my DnD app!
+            Welcome to myD&D app!
           </strong>
-        </h1>
-
-        <div class="mt-8 flex flex-wrap gap-4 text-center">
-          <a
-            href="#"
-            class="block w-full rounded bg-rose-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-rose-800 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto"
+          <p
+            class="mb-8 text-xl text-center md:text-start mt-4 text-white font-semibold"
           >
-            Get Started
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="classes__section h-full pt-12 bg-[#FFF6F6]">
-    <div class="container mx-auto">
-      <div v-for="(item, idx) in homeData" :key="idx">
-        <div></div>
-        <h2 class="text-2xl font-bold pb-6">
-          {{ item.title }}
-        </h2>
-        <div class="home__content" v-html="item.description"></div>
+            In this app you can find information about D&D classes and monsters
+            or create your notes based on your campaigns!
+          </p>
+        </h1>
+        <router-link
+          class="px-4 py-2 bg-rose-600 text-white rounded-md text-xl font-semibold shadow-md"
+          :to="{ name: 'CampaignsView' }"
+        >
+          START TAKING NOTES
+        </router-link>
       </div>
     </div>
   </section>
@@ -58,14 +36,18 @@ homeData.value = getDirectusCollection();
 
 <style>
 .hero {
-  max-height: calc(100vh - 4rem);
+  height: calc(100vh - 4rem);
 }
 
-.hero__container {
+/* .hero__container {
   background-image: url("../assets/home/hero.png");
-}
+} */
 
 .home__content > ul {
   list-style: disc !important;
+}
+
+.home__section {
+  min-height: 300px;
 }
 </style>

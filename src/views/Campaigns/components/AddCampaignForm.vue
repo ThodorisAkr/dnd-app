@@ -1,6 +1,6 @@
 <script setup>
 import TextInput from "@/components/Inputs/TextInput.vue";
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 
 const initialState = {
   title: "",
@@ -16,9 +16,20 @@ const clearForm = () => {
 };
 
 const submitForm = () => {
-  emit("submit-campaign", { ...campaignData });
+  if (titleValidation.value && descriptionValidation.value) {
+    emit("submit-campaign", { ...campaignData });
+  }
   clearForm();
 };
+
+/**Computed */
+const titleValidation = computed(() => {
+  return !!campaignData.title;
+});
+
+const descriptionValidation = computed(() => {
+  return !!campaignData.description;
+});
 </script>
 
 <template>

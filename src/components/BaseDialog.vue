@@ -14,7 +14,10 @@ const myDialog = ref(null);
 useClickOutside(
   myDialog,
   () => emit("click-outside"),
-  () => dialogOpen.value
+  () => dialogOpen.value,
+  {
+    handleEscape: true,
+  }
 );
 
 const dialogOpening = ref(false);
