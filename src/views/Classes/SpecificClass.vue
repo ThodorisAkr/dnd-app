@@ -1,7 +1,7 @@
 <script setup>
 import useHttp from "@/composables/useHttp.js";
 import { getClass } from "@/api/classesApi.js";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import MyAccordion from "./components/MyAccordion.vue";
 import BaseSpinner from "../../components/BaseSpinner.vue";
@@ -24,11 +24,18 @@ const getClassImage = () => {
 
 handleFetchClass();
 
+/** computed */
+const armor = computed(() => {
+  return classDetails.value.proficiencies.filter((item) =>
+    item.index.includes("armor")
+  );
+});
+
 const titleClasses = "font-bold text-3xl mt-4";
 </script>
 
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto mb-20">
     <div v-if="classDetails" class="container mx-auto">
       <div class="flex items-center py-10">
         <the-back-button></the-back-button>
@@ -38,26 +45,24 @@ const titleClasses = "font-bold text-3xl mt-4";
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2">
         <div class="order-2 md:order-0">
-          <div>
+          <div class="flex">
             <font-awesome-icon
               icon="fa-solid fa-dice-d20"
               class="fa-2x mr-4 text-redish"
             />
-            <h2 class="inline-block" :class="titleClasses">HIT DIE</h2>
-            <div>d{{ classDetails.hit_die }}</div>
+            <h2 class="inline-block" :class="`${titleClasses} mt-0`">
+              HIT DIE:
+            </h2>
+            <div class="font-bold text-3xl ml-5">
+              d{{ classDetails.hit_die }}
+            </div>
           </div>
 
           <div>
             <h2 :class="titleClasses">Proficiencies</h2>
-            <div class="my-2 flex flex-wrap">
+            <div v-show="armor.length > 0" class="my-2 flex flex-wrap">
               <h3 class="font-medium">Armor:</h3>
-              <span
-                v-for="(prof, idx) in classDetails.proficiencies.filter(
-                  (item) => item.index.includes('armor')
-                )"
-                :key="idx"
-                class="mx-2"
-              >
+              <span v-for="(prof, idx) in armor" :key="idx" class="mx-2">
                 {{ prof.name }}
               </span>
             </div>

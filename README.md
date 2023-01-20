@@ -1,8 +1,7 @@
 # Dnd Application
 
-A DnD application developed for fun and personal
-use, while practicing on Vue.js composition API, Tailwind CSS and Directus.
-This app’s goal is to utilize dnd5e.co API to present data on D&D topics (classes, monsters etc.), while offering a nice interface for any user to take notes based on the game.
+A DnD application developed for fun and personal use, while practicing on Vue.js composition API,
+Tailwind CSS and Directus. This app’s goal is to utilize dnd5e.co API to present data on D&D topics (classes, monsters etc.), while offering a nice interface for any user to take notes based on the game.
 
 Currently making use of someone's localStorage to handle their notes.
 

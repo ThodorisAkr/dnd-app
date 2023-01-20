@@ -1,13 +1,19 @@
 <script setup>
+import { ref } from "vue";
 import CONFIG from "@/common/config.js";
 
 const routes = CONFIG.routes;
+
+const checkbox = ref(null);
+const closeMenu = () => {
+  checkbox.value.checked = false;
+};
 </script>
 
 <template>
   <nav role="navigation">
     <div id="menuToggle">
-      <input type="checkbox" />
+      <input type="checkbox" ref="checkbox" />
       <span></span>
       <span></span>
       <span></span>
@@ -17,6 +23,7 @@ const routes = CONFIG.routes;
             :key="route.to.name"
             :to="route.to"
             :data-testid="route.title"
+            @click="closeMenu()"
           >
             {{ route.title }}
           </RouterLink>
