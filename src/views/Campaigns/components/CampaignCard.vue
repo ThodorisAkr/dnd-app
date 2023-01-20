@@ -66,20 +66,20 @@ const getTypeImg = (type) => {
         {{ props.item.title }}
       </div>
       <div ref="typeMenu">
-        <ul class="flex list-none rounded border-black mt-4 w-full">
+        <ul class="flex list-none rounded border-black mt-4">
           <li
             v-for="(item, idx) in userActions"
             :key="idx"
-            class="mx-3 cursor-pointer transition duration-300 flex items-center"
+            class="mx-1 md:mx-3 cursor-pointer transition duration-300 flex items-center"
             :title="item"
           >
             <div
-              class="rounded-full w-[50px] h-[50px] bg-white border-4 overflow-hidden flex justify-center items-center"
+              class="rounded-full w-[40px] h-[40px] md:w-[50px] md:h-[50px] bg-white border-4 overflow-hidden flex justify-center items-center"
               @click.stop="openCampaignNotes(item)"
             >
               <img
                 :src="getTypeImg(item)"
-                class="max-h-[40px] hover:max-h-[45px] max-w-[40px] hover:max-w-[45px]"
+                class="max-h-[30px] hover:max-h-[35px] md:max-h-[40px] md:hover:max-h-[45px]"
                 style="object-fit: contain"
               />
             </div>

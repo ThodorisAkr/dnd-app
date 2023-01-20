@@ -47,5 +47,9 @@ export const useNoteStore = defineStore({
       const item = this.notes[idx];
       return item?.typeNotes[type] || [];
     },
+
+    getCampaignName(idx) {
+      return this.notes[idx];
+    },
   },
 });
