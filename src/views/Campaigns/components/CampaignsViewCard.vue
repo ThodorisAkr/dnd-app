@@ -32,7 +32,7 @@ const toggleMenuOpen = () => {
 };
 const openCampaignNotes = (type = "characters") => {
   router.push({
-    name: "SpecificNotes",
+    name: "SpecificNote",
     params: {
       id: props.item.id,
       type,

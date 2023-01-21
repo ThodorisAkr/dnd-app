@@ -13,14 +13,15 @@ export default {
     },
     {
       path: ":id",
-      name: "CampaignNotes",
-      component: () => import("@/views/Campaigns/CampaignNotes.vue"),
+      name: "NotesView",
+      component: () => import("@/views/Campaigns/NotesView.vue"),
       props: (route) => ({ campaignId: route.params.id }),
       children: [
         {
           path: ":type",
-          name: "SpecificNotes",
-          component: () => import("@/views/Campaigns/SpecificNotes.vue"),
+          name: "SpecificNote",
+          component: () =>
+            import("@/views/Campaigns/NotesViewSpecificNote.vue"),
           props: (route) => ({
             campaignId: route.params.id,
             noteType: route.params.type,
@@ -28,7 +29,7 @@ export default {
           beforeEnter(to, from, next) {
             if (!CONFIG.noteTypes.includes(to.params.type)) {
               router.replace({
-                name: "SpecificNotes",
+                name: "SpecificNote",
                 params: {
                   id: to.params.id,
                   type: "characters",

@@ -5,10 +5,10 @@ import { useNoteStore } from "@/stores/notes";
 import { useKeyPress } from "@/composables/useKeyPress";
 import { useDebounce } from "@/composables/useDebounce";
 
-import NoteItemCard from "./components/NoteItemCard.vue";
+import NotesItemCard from "./components/NotesItemCard.vue";
 import BaseCard from "../../components/BaseCard.vue";
 import BaseDialog from "../../components/BaseDialog.vue";
-import AddNoteForm from "./components/AddNoteForm.vue";
+import NotesAddNewForm from "./components/NotesAddNewForm.vue";
 
 const props = defineProps({
   campaignId: {
@@ -167,11 +167,11 @@ watch(
     </div>
     <div class="min-h-full flex flex-col">
       <div v-for="(item, idx) in computedNotes" :key="idx" class="w-full">
-        <note-item-card
+        <notes-item-card
           :item="item"
           @edit-item="handleEdit($event)"
           @delete-item="handleDelete(item.id)"
-        ></note-item-card>
+        ></notes-item-card>
       </div>
       <div class="flex-grow flex flex-col justify-center items-center">
         <div v-if="computedNotes.length <= 0 && !search">
@@ -223,11 +223,11 @@ watch(
         <div
           class="card__content flex flex-auto flex-column justify-center items-start w-full"
         >
-          <add-note-form
+          <notes-add-new-form
             @submit-form="createUpdateNote($event)"
             :editing-note="editingItem"
             :is-open="addNoteDialogOpen"
-          ></add-note-form>
+          ></notes-add-new-form>
         </div>
       </base-card>
     </base-dialog>
