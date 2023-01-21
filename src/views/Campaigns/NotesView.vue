@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useNoteStore } from "@/stores/notes";
-import NoteTypeCard from "./components/NoteTypeCard.vue";
+import NotesTypeCard from "./components/NotesTypeCard.vue";
 
 const props = defineProps({
   campaignId: {
@@ -20,7 +20,7 @@ const campaign = ref(null);
 })();
 
 const openNoteCard = (type) => {
-  router.push({ name: "SpecificNotes", params: { type: type.toLowerCase() } });
+  router.push({ name: "SpecificNote", params: { type: type.toLowerCase() } });
 };
 const noteOptions = {
   left: [
@@ -52,14 +52,14 @@ const noteOptions = {
         <div
           class="flex lg:grid grid-cols-3 lg:grid-cols-1 gap-1 lg:gap-4 place-items-center lg:place-items-start"
         >
-          <note-type-card
+          <notes-type-card
             v-for="item in noteOptions.left"
             :item="item"
             :key="item.label"
             position="r"
             class="mx-4"
             @click="openNoteCard(item.label)"
-          ></note-type-card>
+          ></notes-type-card>
         </div>
       </div>
       <div class="w-full lg:col-span-8 order-3 mx-2">
@@ -69,14 +69,14 @@ const noteOptions = {
         <div
           class="flex lg:grid grid-cols-2 lg:grid-cols-1 gap-1 lg:gap-4 xl:place-items-end lg:place-items-end"
         >
-          <note-type-card
+          <notes-type-card
             v-for="item in noteOptions.right"
             :item="item"
             :key="item.label"
             position="l"
             class="mx-4"
             @click="openNoteCard(item.label)"
-          ></note-type-card>
+          ></notes-type-card>
         </div>
       </div>
     </div>

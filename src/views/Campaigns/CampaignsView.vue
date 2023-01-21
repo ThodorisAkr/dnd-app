@@ -4,10 +4,10 @@ import { ref } from "vue";
 import { useNoteStore } from "@/stores/notes";
 
 import NormalViewWrapper from "../../components/Wrappers/NormalViewWrapper.vue";
-import CampaignCard from "./components/CampaignCard.vue";
+import CampaignCard from "./components/CampaignsViewCard.vue";
 import BaseDialog from "@/components/BaseDialog.vue";
 import BaseCard from "@/components/BaseCard.vue";
-import AddCampaignForm from "./components/AddCampaignForm.vue";
+import CampaignsAddNewForm from "./components/CampaignsAddNewForm.vue";
 
 const noteSystem = useNoteStore();
 
@@ -78,9 +78,9 @@ const toggleDialog = () => {
         <div
           class="card__content flex-auto flex flex-column justify-center items-start w-full"
         >
-          <add-campaign-form
+          <campaigns-add-new-form
             @submit-campaign="addNewCampaign($event)"
-          ></add-campaign-form>
+          ></campaigns-add-new-form>
         </div>
       </base-card>
     </base-dialog>

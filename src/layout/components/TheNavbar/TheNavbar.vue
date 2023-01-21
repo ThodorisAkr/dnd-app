@@ -28,10 +28,6 @@ const isActive = (name) => {
         {{ route.title }}
       </RouterLink>
     </div>
-    <!-- <font-awesome-icon
-        icon="fa-solid fa-arrow-right-from-bracket"
-        class="text-white fa-2x"
-      /> -->
 
     <div class="md:hidden h-[4rem]">
       <mobile-menu></mobile-menu>
