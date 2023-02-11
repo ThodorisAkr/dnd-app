@@ -63,7 +63,9 @@ const noteOptions = {
         </div>
       </div>
       <div class="w-full lg:col-span-8 order-3 mx-2">
-        <router-view></router-view>
+        <div class="h-full">
+          <router-view></router-view>
+        </div>
       </div>
       <div class="col-span-2 lg:col-span-2 order-2 lg:order-4">
         <div

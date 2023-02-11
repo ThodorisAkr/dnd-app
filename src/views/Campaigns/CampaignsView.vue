@@ -27,7 +27,7 @@ const toggleDialog = () => {
 <template>
   <normal-view-wrapper>
     <template #title>
-      <h1 class="text-5xl">My Campaigns</h1>
+      <h1 class="text-4xl md:text-5xl">My Campaigns</h1>
       <button class="mt-2 ml-8" @click="toggleDialog()">
         <font-awesome-icon
           icon="fas fa-plus"
