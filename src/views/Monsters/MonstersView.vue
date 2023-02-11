@@ -62,7 +62,7 @@ handleMonsters();
       <div class="lg:flex items-end justify-between mb-10">
         <div class="flex items-center text-purpleish">
           <font-awesome-icon icon="fa-brands fa-d-and-d" class="fa-3x" />
-          <h1 class="text-5xl">DnD Monsters</h1>
+          <h1 class="text-3xl md:text-5xl">DnD Monsters</h1>
         </div>
         <label class="relative block mt-5 lg:mt-0 min-w-[250px] max-w-[400px]">
           <span class="sr-only">Search</span>

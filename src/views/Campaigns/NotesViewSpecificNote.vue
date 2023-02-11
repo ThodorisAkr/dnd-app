@@ -96,6 +96,7 @@ const closeDialog = () => {
 function searchNote(key) {
   if (!key) {
     filteredNotes.value = null;
+    return;
   }
   if (currTypeNotes.value) {
     filteredNotes.value = currTypeNotes.value.filter((item) =>
@@ -129,14 +130,14 @@ watch(search, (newVal) => debouncedSearch.value(newVal));
 watch(
   () => route.params.type,
   () => {
-    filteredNotes.value = null;
     search.value = "";
+    filteredNotes.value = null;
   }
 );
 </script>
 
 <template>
-  <div class="h-full">
+  <div class="pb-24">
     <div class="md:flex md:justify-center lg:justify-between items-center mb-4">
       <div class="flex items-center flex-wrap my-4 lg:my-0">
         <h1 class="text-3xl">Your {{ noteType }} notes</h1>
