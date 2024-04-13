@@ -16,7 +16,7 @@ Currently making use of someone's localStorage to handle their notes.
 
 - Add data in home page
 - Add more views with data from dnd5e.co API
-- Create a user system with Directus to handle account information and connect notes with user's account
+- Create a user system to handle account information and connect notes with user's account
 
 npm install
 
