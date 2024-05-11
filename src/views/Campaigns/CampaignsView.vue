@@ -22,17 +22,53 @@ const addNewCampaign = (payload) => {
 const toggleDialog = () => {
   dialogOpen.value = !dialogOpen.value;
 };
+
+function downloadNotes(data) {
+  const content = JSON.stringify(data);
+  var a = document.createElement("a");
+  var file = new Blob([content], { type: "text/plain" });
+  a.href = URL.createObjectURL(file);
+  a.download = "DnD_notes.txt";
+  a.click();
+}
+
+function importNotes(evt) {
+  var f = evt.target.files[0];
+  if (f.type !== "text/plain") return;
+  if (f) {
+    var r = new FileReader();
+    r.onload = function (e) {
+      var contents = e.target.result;
+      noteSystem.importCampaignNotes(JSON.parse(contents));
+    };
+    r.readAsText(f);
+  } else {
+    alert("Failed to load file");
+  }
+}
 </script>
 
 <template>
   <normal-view-wrapper>
     <template #title>
-      <h1 class="text-4xl md:text-5xl">My Campaigns</h1>
-      <button class="mt-2 ml-8" @click="toggleDialog()">
+      <div class="flex-grow flex">
+        <h1 class="text-4xl md:text-5xl">My Campaigns</h1>
+        <button class="mt-2 ml-8" @click="toggleDialog()">
+          <font-awesome-icon
+            icon="fas fa-plus"
+            class="fa-2x text-rose-800"
+          ></font-awesome-icon>
+        </button>
+      </div>
+      <button
+        class="mx-auto rounded-lg p-2 flex items-center justify-center border-2 border-black my-6 hover:bg-black/5 active:bg-black/20"
+        @click="downloadNotes(noteSystem.notes)"
+      >
         <font-awesome-icon
-          icon="fas fa-plus"
-          class="fa-2x text-rose-800"
+          icon="fas fa-download"
+          class="fa-xl mr-1 text-black"
         ></font-awesome-icon>
+        <span> Export your notes! </span>
       </button>
     </template>
     <div v-if="noteSystem.notes.length === 0" class="text-center">
@@ -49,6 +85,26 @@ const toggleDialog = () => {
           Create a Campaign Notebook!
         </span>
       </button>
+      <div>Or</div>
+      <label for="dndImport">
+        <div
+          class="inline-block mx-auto rounded-lg p-2 text-white items-center justify-center border-2 border-black my-6 hover:bg-black/5 active:bg-black/20"
+        >
+          <font-awesome-icon
+            icon="fas fa-file-import"
+            class="fa-xl mr-1 text-black"
+          ></font-awesome-icon>
+          <span class="text-black cursor-pointer">
+            Import an existing notebook!
+          </span>
+        </div>
+        <input
+          type="file"
+          id="dndImport"
+          @change="importNotes($event)"
+          class="hidden"
+        />
+      </label>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-8">

@@ -20,7 +20,10 @@ const campaign = ref(null);
 })();
 
 const openNoteCard = (type) => {
-  router.push({ name: "SpecificNote", params: { type: type.toLowerCase() } });
+  router.replace({
+    name: "SpecificNote",
+    params: { type: type.toLowerCase() },
+  });
 };
 const noteOptions = {
   left: [
@@ -40,7 +43,7 @@ const noteOptions = {
   <div class="container mx-auto">
     <div class="flex items-center pt-10">
       <the-back-button></the-back-button>
-      <h1 class="text-5xl">
+      <h1 class="text-3xl md:text-5xl">
         Notes for Campaign:
         {{ noteSystem.getCampaignName(campaignId - 1).title }}
       </h1>
@@ -63,7 +66,7 @@ const noteOptions = {
         </div>
       </div>
       <div class="w-full lg:col-span-8 order-3 mx-2">
-        <div class="h-full">
+        <div class="h-full mr-2">
           <router-view></router-view>
         </div>
       </div>
