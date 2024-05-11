@@ -51,5 +51,10 @@ export const useNoteStore = defineStore({
     getCampaignName(idx) {
       return this.notes[idx];
     },
+
+    importCampaignNotes(notes) {
+      this.notes = [...notes];
+      localStorage.setItem("notes", JSON.stringify(this.notes));
+    },
   },
 });
